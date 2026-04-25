@@ -13,15 +13,21 @@ While playing around with SQLite recently, I came about an interesting challenge
 import { Image } from 'astro:assets'
 import PreviewImage from '../assets/posts/collatz-sqlite.png'
 
-<Image src={PreviewImage} class="sm:w-2/3 w-4/5 my-0 mx-auto" data-img-embed alt="A visualization of the paths from each integer down to 1 according to the Collatz Conjecture" loading="eager"/>
+<Image
+  src={PreviewImage}
+  class="mx-auto my-0 w-4/5 sm:w-2/3"
+  data-img-embed
+  alt="A visualization of the paths from each integer down to 1 according to the Collatz Conjecture"
+  loading="eager"
+/>
 
 ## The Collatz Conjecture
 
-For those unfamiliar with it (most CS students will encounter it in their first university semester), the *Collatz Conjecture*[^collatz-conjecture] is a famous maths problem. It asks the simple yet intriguing question of:
+For those unfamiliar with it (most CS students will encounter it in their first university semester), the _Collatz Conjecture_[^collatz-conjecture] is a famous maths problem. It asks the simple yet intriguing question of:
 
 > If you start with any positive integer and repeatedly divide it by 2 if it's even, or multiply it by 3 and add 1 if it's odd, will you always eventually reach the number 1?
 
-As a *conjecture*, it is believed to be true but not yet proven. But even without a mathematics degree, you can easily test the conjecture for any number. Here are a few examples:
+As a _conjecture_, it is believed to be true but not yet proven. But even without a mathematics degree, you can easily test the conjecture for any number. Here are a few examples:
 
 - 3 - 10 - 5 - 16 - 8 - 4 - 2 - 1. It works.
 - 17 - 52 - 26 - 13 - 40 - 20 - 10 - 5 - 16 - 8 - 4 - 2 - 1. It works again!
@@ -43,16 +49,16 @@ while n > 1:
     else:
         n = n * 3 + 1
 
-print(steps) 
+print(steps)
 ```
 
-This script uses a simple loop to apply the Collatz rules until it reaches `1`, then prints the steps taken. Note that this assumes the conjecture actually holds, otherwise the loop runs indefinitely (but I am optimistic 😉).
+This script uses a simple loop to apply the Collatz rules until it reaches `1`, then prints the steps taken[^infinite-loop].
 
 ## Recursive Common Table Expressions in SQL
 
 All nice and easy so far, but what about doing the same in SQL? While loops are available in various SQL dialects, allowing us to port our Python solution directly, SQLite does not support loops as of now. So, how can we construct a loop in SQLite?
 
-*Enter Recursive Common Table Expressions (CTEs)*[^ctes]! Without going too deeply into the details, CTEs in SQL are temporary result sets that can be referenced within another SQL statement to simplify complex queries, avoid duplication, access hierarchical data, and keep code modular and clean. For the syntax, see this simple example:
+_Enter Recursive Common Table Expressions (CTEs)_[^ctes]! Without going too deeply into the details, CTEs in SQL are temporary result sets that can be referenced within another SQL statement to simplify complex queries, avoid duplication, access hierarchical data, and keep code modular and clean. For the syntax, see this simple example:
 
 ```sql title="my_cte.sql"
 WITH my_cte AS (
@@ -107,4 +113,7 @@ print(collatz(17))
 The mathematics and programming constructs presented in this post are not rocket science, but for me the SQLite solution to the problem has a certain elegance. Common Table Expressions (CTEs) can be a versatile and useful tool, and are certainly worth to be studied in detail. They are especially helpful for tasks such as implementing loops or generating integer sequences, and a problem like the Collatz Conjecture is the perfect example of their application on a real problem!
 
 [^collatz-conjecture]: [Collatz Conjecture on Wikipedia](https://en.wikipedia.org/wiki/Collatz_conjecture)
+
+[^infinite-loop]: Note that this assumes the conjecture actually holds, otherwise the loop runs indefinitely (but I am optimistic 😉).
+
 [^ctes]: [CTEs on GeeksForGeeks](https://www.geeksforgeeks.org/sql/cte-in-sql/)

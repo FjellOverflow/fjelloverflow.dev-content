@@ -1,5 +1,5 @@
 ---
-title: "Software Versioning: a recipe"
+title: 'Software Versioning: a recipe'
 description: Specifications and best practices in software development
 publishedDate: 2024-11-29
 previewImage: '../assets/posts/versioning.png'
@@ -13,17 +13,23 @@ My project is on version `2.3.4`, and I have implemented a critical fix. What is
 import { Image } from 'astro:assets'
 import PreviewImage from '../assets/posts/versioning.png'
 
-<Image src={PreviewImage} class="sm:w-2/3 w-4/5 my-0 mx-auto" data-img-embed alt="A computer monitor with chat bubbles floating around it" loading="eager"/>
+<Image
+  src={PreviewImage}
+  class="mx-auto my-0 w-4/5 sm:w-2/3"
+  data-img-embed
+  alt="A computer monitor with chat bubbles floating around it"
+  loading="eager"
+/>
 
 ## Semantic Versioning
 
-A widely adopted system for versioning software is *Semantic Versioning*, or *SemVer*[^semver] for short. Chances are high that you have seen or used it already, perhaps even without realizing that this intuitive system is actually a strict specification. SemVer versions may look like `2.10.4`, `0.2.0` or `1.2.1-rc.2`.
+A widely adopted system for versioning software is _Semantic Versioning_, or _SemVer_[^semver] for short. Chances are high that you have seen or used it already, perhaps even without realizing that this intuitive system is actually a strict specification. SemVer versions may look like `2.10.4`, `0.2.0` or `1.2.1-rc.2`.
 
 A SemVer version is a `<major>.<minor>.<patch>` string, where `major`, `minor` and `patch` are numbers starting with `0` and incremented in steps of `1`. In short, the new version after a code change is determined by the following rules:
 
-- After a *breaking change*, `major` is incremented: `1.2.3` -> `2.0.0`
-- After a *non-breaking* change or new feature, `minor` is incremented: `1.2.3` -> `1.3.0`
-- After a *fix*, `patch` is incremented: `1.2.3` -> `1.2.4`
+- After a _breaking change_, `major` is incremented: `1.2.3` -> `2.0.0`
+- After a _non-breaking_ change or new feature, `minor` is incremented: `1.2.3` -> `1.3.0`
+- After a _fix_, `patch` is incremented: `1.2.3` -> `1.2.4`
 
 When `major` is incremented, `minor` and `patch` are reset to `0`. When `minor` is incremented, `patch` is reset to `0`. Some additional rules include:
 
@@ -38,7 +44,7 @@ While this specification is neat and not overly complicated, one might wonder ho
 
 ## Conventional Commits
 
-The answer is "no", at least if we are using version control (git). *Conventional Commits*[^conventional-commits] is another specificiation closely related to SemVer, dictating the format and content of commit messages. By following the Conventional Commits specification during development, we can use handy tools or scripts to detect all changes since the last release and automatically increment the version appropriately. Conventional Commit messages could be:
+The answer is "no", at least if we are using version control (git). _Conventional Commits_[^conventional-commits] is another specificiation closely related to SemVer, dictating the format and content of commit messages. By following the Conventional Commits specification during development, we can use handy tools or scripts to detect all changes since the last release and automatically increment the version appropriately. Conventional Commit messages could be:
 
 - `fix: rounding error in final sum calculation`
 - `feat(invoices): add PDF export`
@@ -48,7 +54,7 @@ Their general form is
 
 ```text Conventional Commits schema
 <type>[optional scope]: <description>
-  
+
 [optional body]
 [optional footer(s)]
 ```
@@ -65,7 +71,7 @@ All in all, Conventional Commits, in combination with SemVer, nicely defines how
 
 ## Keeping a Changelog
 
-The obvious answer is a *Changelog*, a file where we add a list of new changes after each new release. This can be a lot of repetitive work when done manually, but fortunately, we can automate this as well, provided we adhered to the Conventional Commits specification during development! Our commit history might look like this:
+The obvious answer is a _Changelog_, a file where we add a list of new changes after each new release. This can be a lot of repetitive work when done manually, but fortunately, we can automate this as well, provided we adhered to the Conventional Commits specification during development! Our commit history might look like this:
 
 ```sh title="git log --oneline"
 bb84b39 fix: rounding error in final sum calculation
@@ -81,11 +87,11 @@ Our last release was `1.2.3`. We made three changes and are now ready to do a ne
 
 ### Features
 
-* **invoices:** add PDF export (fab74b2)
+- **invoices:** add PDF export (fab74b2)
 
 ### Bug Fixes
 
-* rounding error in final sum calculation (bb84b39)
+- rounding error in final sum calculation (bb84b39)
 ```
 
 Note that the new version will be `1.3.0` because a new feature was added, which calls for a `minor` increment. The level of detail, format, and the commit types listed can most often be configured for the specific tool used.
@@ -119,16 +125,15 @@ With that, we can prevent the commit of faulty or insufficiently formatted messa
 Having covered all the puzzle pieces for a good versioning workflow, let's recapitulate and outline all the necessary steps:
 
 - When we commit changes to the code, we follow the [Conventional Commits](#conventional-commits) specification to craft well-typed and formatted messages describing the changes.
-
-  - 🤖 *(We integrate a commit linter into the project, preventing malformed commits)*
+  - 🤖 _(We integrate a commit linter into the project, preventing malformed commits)_
 
 - To release a new version, we review the commit types (`feat`, `fix`, `refactor`, ...) and calculate the new version number according to [SemVer](#semantic-versioning)
 
 - We then add a short list or summary of the relevant changes to our [changelog](#keeping-a-changelog)
-
-  - 🤖 *(Or we use a tool that bumps the version and generates the changelog)*
+  - 🤖 _(Or we use a tool that bumps the version and generates the changelog)_
 
 Of course, there are plenty of scenarios where additional or different requirements, steps, and tools need to be involved in the release process. It is not mandatory to follow the listed conventions, but a growing number of open-source projects do adhere to them, and if in doubt, you should definitely consider adopting these practices for your project or team!
 
 [^semver]: [semver.org](https://semver.org/)
+
 [^conventional-commits]: [conventionalcommits.org](https://www.conventionalcommits.org/)

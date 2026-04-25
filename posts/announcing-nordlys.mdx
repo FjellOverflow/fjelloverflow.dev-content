@@ -14,7 +14,13 @@ I'm happy to announce the first release of Nordlys, a minimal Astro blog theme! 
 import { Image } from 'astro:assets'
 import PreviewImage from '../assets/posts/announcing-nordlys.png'
 
-<Image src={PreviewImage} class="sm:w-2/3 w-4/5 my-0 mx-auto" data-img-embed alt="A computer monitor with chat bubbles floating around it" loading="eager"/>
+<Image
+  src={PreviewImage}
+  class="mx-auto my-0 w-4/5 sm:w-2/3"
+  data-img-embed
+  alt="A computer monitor with chat bubbles floating around it"
+  loading="eager"
+/>
 
 ## About the Theme
 

@@ -9,22 +9,26 @@ tags:
   - typescript
 ---
 
-When you create a Progressive Web App (PWA), you likely want your users to install the app on their mobile devices so that it appears and functions like a native app. Chrome provides an installation prompt that appears when your app meets all PWA criteria. However, wouldn't it be convenient if your app could include an `Install` button that users can click to install the app? Here's how to do that!
+When you create a [Progressive Web App](https://web.dev/learn/pwa/progressive-web-apps/) (PWA), you likely want your users to install the app on their mobile devices so that it appears and functions like a native app. Chrome provides an installation prompt[^chrome-only] that appears when your app meets all PWA criteria. However, wouldn't it be convenient if your app could include an `Install` button that users can click to install the app? Here's how to do that!
 
 import { Image } from 'astro:assets'
 import PreviewImage from '../assets/posts/prompting-PWA-install.jpg'
 
-<Image src={PreviewImage} class="sm:w-2/3 w-4/5 my-0 mx-auto" data-img-embed alt="A penguin standing in an icy landscape, holding a small key" loading="eager"/>
+<Image
+  src={PreviewImage}
+  class="mx-auto my-0 w-4/5 sm:w-2/3"
+  data-img-embed
+  alt="A penguin standing in an icy landscape, holding a small key"
+  loading="eager"
+/>
 
 ## Prerequisite
 
 Before you get started, ensure that you have already implemented PWA support in your web app. With Vue (or Vite-based projects), you can use [Vite-PWA](https://vite-pwa-org.netlify.app/) to get started with that. Make sure your app fulfills the PWA criteria; otherwise, the installation prompt will never be invoked by the browser.
 
-Also note, that of the the moment of writing this, its only Chrome browser that offers this installtion prompt so far.
-
 ## Catching the event
 
-To offer the installation prompt to the user, you need to catch the event when it fires from the browser. Start by creating a file `pwaInstall.ts` and defining the `BeforeInstallPromptEvent`.
+To offer the installation prompt to the user, you need to catch the event when it fires from the browser. Start by creating a file `pwaInstall.ts` and defining the `BeforeInstallPromptEvent`[^before-install-prompt].
 
 ```typescript title="pwaInstall.ts"
 // define type for event
@@ -59,7 +63,6 @@ const pwaInstallPromptEvent = ref<BeforeInstallPromptEvent>()
 
 function checkIfInstallable() {
   window.addEventListener('beforeinstallprompt', (event) => {
-
     // block the event
     event.preventDefault()
 
@@ -95,10 +98,14 @@ In your HTML (Vue component), you can now add this button
 import { pwaInstallPromptEvent } from 'src/pwaInstall'
 </script>
 <template>
-    <button v-if="pwaInstallPromptEvent" @click="pwaInstallPromptEvent.prompt()">
-        Install PWA
-    </button>
+  <button v-if="pwaInstallPromptEvent" @click="pwaInstallPromptEvent.prompt()">
+    Install PWA
+  </button>
 </template>
 ```
 
 With this, the button will only be shown if installation is actually possible, and it will trigger the prompt when clicked. And that's it!
+
+[^chrome-only]: At the time of writing, only Chrome-based browsers (which is a majority of all) offer this installation prompt.
+
+[^before-install-prompt]: [BeforeInstallPromptEvent](https://developer.mozilla.org/en-US/docs/Web/API/BeforeInstallPromptEvent)

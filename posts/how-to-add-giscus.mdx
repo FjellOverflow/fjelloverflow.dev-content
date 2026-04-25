@@ -13,13 +13,19 @@ Hosting a thin static blog on a platform like [GitHub Pages](https://docs.github
 import { Image } from 'astro:assets'
 import PreviewImage from '../assets/posts/how-to-add-giscus.png'
 
-<Image src={PreviewImage} class="sm:w-2/3 w-4/5 my-0 mx-auto" data-img-embed alt="A computer monitor with chat bubbles floating around it" loading="eager"/>
+<Image
+  src={PreviewImage}
+  class="mx-auto my-0 w-4/5 sm:w-2/3"
+  data-img-embed
+  alt="A computer monitor with chat bubbles floating around it"
+  loading="eager"
+/>
 
 ## How _Giscus_ works
 
 [Giscus uses the GitHub API](https://github.com/giscus/giscus?tab=readme-ov-file#how-it-works) to read and store comments made by _GitHub_ users in the `Discussions` associated with a repository.
 
-Embed the _Giscus_ client-side script bundle on your site, configure it with the correct repository URL, and users can view and write comments (when logged into _GitHub_).
+Embed the _Giscus_ client-side script bundle on your site, configure it with the correct repository URL, and users can view and write comments[^github-login].
 
 The approach is serverless, as the comments are stored on _GitHub_ and dynamically loaded from there on the client side, hence perfect for a static blog.
 
@@ -100,3 +106,5 @@ Simply add that to the source code of the site. For instance, if you're using [N
 ```
 
 And it's done! You have successfully integrated comments on your site!
+
+[^github-login]: Requires users to be logged into a _GitHub_ account.

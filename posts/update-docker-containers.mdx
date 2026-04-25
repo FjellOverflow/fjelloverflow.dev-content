@@ -14,7 +14,13 @@ In the realm of self-hosting, it is very common to run containerized application
 import { Image } from 'astro:assets'
 import PreviewImage from '../assets/posts/update-docker-containers.png'
 
-<Image src={PreviewImage} class="sm:w-2/3 w-4/5 my-0 mx-auto" data-img-embed alt="A snowy landscape where colorful shipping containers are standing around, being stacked by big cranes" loading="eager"/>
+<Image
+  src={PreviewImage}
+  class="mx-auto my-0 w-4/5 sm:w-2/3"
+  data-img-embed
+  alt="A snowy landscape where colorful shipping containers are standing around, being stacked by big cranes"
+  loading="eager"
+/>
 
 ## A little background
 
@@ -44,11 +50,11 @@ The first lesson here is to always specify a tag. Even when using the default `l
 
 The `latest` tag generally refers to the most recent release of the software. For instance, `latest` might refer to `nginx:1.26.2`, but when `nginx:1.27.0` gets released, `latest` will instead point to that. Setting the `latest` tag in our `docker-compose.yaml` essentially says that it should run the newest version of the image. The clear advantage of running the newest releases is that we get all the new features, fixes, and security patches. On the downside, we lose a lot of stability. Other than reading release notes, following GitHub issues, and testing out our application after pulling a fresh image, things might break at any time if a new _nginx_ version contains bugs or breaking changes.
 
-The alternative is specifying an explicit version number as a tag, for instance, `nginx:1.26.2`. We can pull images and recreate containers however we want and will still always end up with the same _nginx_ version that we expect (provided the image builder does not arbitrarily re-tag images, which he shouldn't). That gives us more peace of mind, ensuring our application will always be stable, but on the other hand, of course, it requires us to manually change the tag in the `docker-compose.yaml` and update the container when we need or want to upgrade, for instance, when a new _nginx_ version patches a security issue.
+The alternative is specifying an explicit version number as a tag, for instance, `nginx:1.26.2`. We can pull images and recreate containers however we want and will still always end up with the same _nginx_ version that we expect[^retag]. That gives us more peace of mind, ensuring our application will always be stable, but on the other hand, of course, it requires us to manually change the tag in the `docker-compose.yaml` and update the container when we need or want to upgrade, for instance, when a new _nginx_ version patches a security issue.
 
 ## What is an _update_ anyway?
 
-Having a bunch of `docker-compose.yaml`s lying around and some containers running, what does it even mean to _update_ a container or image? In order to have an _nginx_ container running, our host computer has at some point pulled the specific _nginx_ image from Docker Hub (or some container registry), and that image exists locally on our host. Whenever we start a container that specifies that specific image (+ tag), exactly this local image will be used. That means to get a _newer_ image, we must do these things:
+Having a bunch of `docker-compose.yaml`s lying around and some containers running, what does it even mean to _update_ a container or image? In order to have an _nginx_ container running, our host computer has at some point pulled the specific _nginx_ image from [Docker Hub](https://hub.docker.com/) (or some container registry), and that image exists locally on our host. Whenever we start a container that specifies that specific image (+ tag), exactly this local image will be used. That means to get a _newer_ image, we must do these things:
 
 - if we specified the `latest` tag in the compose file, pull the newest image with `docker pull nginx:latest`
 - if we specified a specific tag like `nginx:1.26.2`, we must edit that tag in the compose file and change it to a newer version, for instance, to `nginx:1.27.0`
@@ -95,3 +101,5 @@ This is a notification you might get from _Watchtower_ in the middle of the nigh
 Specifying the right image tags for our Docker containers is important; it ensures containers run on exactly the version we intended and deliver reproducible behavior. When using the `latest` tag, we need to tread with care to not accidentally switch versions, but we can utilize _Dockcheck_, _Watchtower_, or any of the other countless tools that provide a nice interface to update containers.
 
 Ultimately, we need to balance out stability and the need to keep software up to date; while it might hurt to never update, waiting after a new release rarely hurts, be it days or weeks. What definitely does not hurt is actively checking release notes for breaking changes and taking a quick glance at open issues before updating!
+
+[^retag]: Provided the image builder does not arbitrarily re-tag existing version tags, which is generally considered bad practice.
