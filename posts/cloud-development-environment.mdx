@@ -1,14 +1,14 @@
 ---
-title: WIP
-description: Self-hosting a development environment
-publishedDate: 2026-04-23
+title: Self-hosting a cloud development environment
+description: Combining VSCode Remote and code-server in one container
+publishedDate: 2026-04-24
 tags:
   - docker
   - linux
 draft: true
 ---
 
-WIP
+As software developers, many of us like to work on some private projects in our free time and on multiple devices: a stationary PC, a laptop, maybe a second laptop... Switching between devices is a very tedious task; we constantly need to sync the changes, set up credentials and configurations, and install the same development environment on each device from scratch. Moving from one device to another with unfinished work-in-progress is awkward, so I decided to do something about it and here is my solution: a _cloud-based development environment_!
 
 import { Image } from 'astro:assets'
 import PreviewImage from '../assets/posts/collatz-sqlite.png'
@@ -21,31 +21,29 @@ import PreviewImage from '../assets/posts/collatz-sqlite.png'
   loading="eager"
 />
 
-## The big annoyance
-
-As a software developer, many of us like to work on some private projects in our free time. Also, many of use own multiple devices: a stationary PC, a laptop, maybe a second laptop... Switching between devices is a very tedious task, we constantly need to sync the changes (often with endless git commit, push, pull), we need to setup credentials and configurations and we need to install the same development environment on each device from scratch. Moving from one device to another with unfinished work-in-progress is awkward and debugging why exactly the project runs with errors on one device but not the other is very annyoing. And since I got annoyed, I decide to do something about it and here is my solution to this entire problem: having a _cloud-based development environment_!
-
 ## Existing solutions
 
-People, much more intelligent than me, have recognized this issue and built fantastic solutions, already a long time ago. Full-fledged development environments in the cloud, codespaces, dev-containers and other cool concepts. With a Github Account you can already use their browser-based dev environments, and most big-players in the cloud-computing space offer similar features. If you are happy with that, you can probably stop reading now. But if you are like me, running your own server, getting a kick out of self-hosting semi-critical infrastructure and spending your free time debugging docker containers and your home network, then you might be looking for a different type of solution.
+People, much more intelligent than me, have recognized this issue and built fantastic solutions, already a long time ago. Full-fledged development environments in the cloud, codespaces, dev-containers and other cool concepts. With a GitHub account you can already use its browser-based dev environments, and most big players in the cloud-computing space offer similar features. If you are happy with that, you can probably stop reading now. But if you are like me, running your own server, getting a kick out of self-hosting semi-critical infrastructure and spending your free time debugging docker containers and your home network, then you might be looking for a different type of solution.
 
-While a bit scarser, there are also mature FOSS solutions that can be selfhosted and with these we can get very far. Most notably for this post are **a)** VSCode's [Remote Development](https://code.visualstudio.com/docs/remote/remote-overview) features, allowing you to develop in your locally running VSCode instance that connects to a remote container or machine and **b)** [code-server](https://github.com/coder/code-server), a VSCode instance running in the browser.
+While a bit scarcer, there are also mature FOSS solutions that can be self-hosted, and with these we can get very far. Most notably for this post are **a)** VSCode's [Remote Development](https://code.visualstudio.com/docs/remote/remote-overview) features, allowing you to develop in your locally running VSCode instance that connects to a remote container or machine and **b)** [code-server](https://github.com/coder/code-server), a VSCode instance running in the browser.
 
 ## Best of both worlds
 
-I really like both approaches, they both worked well for me and were fairly straight-forward to setup. So if you want _either_ **a)** work in your local VSCode or **b)** work in the browser, then pick your tool and sail off into the sunset. But sadistic as I am, I wanted _both_. I wanted to work in local VSCode, with the browser IDE as a fallback and of course they should both run in the same environment, so that you could flawlessly switch between them at any time. To explain why that is a bit more difficult to set up, we need to dive into the technicallities of both approaches.
+I really like both approaches; they both worked well for me and were fairly straightforward to set up. So if you want _either_ **a)** to work in your local VSCode or **b)** to work in the browser, then pick your tool and sail off into the sunset. But sadistic as I am, I wanted _both_. I wanted to work in local VSCode, with the browser IDE as a fallback, and of course they should both run in the same environment, so that you could flawlessly switch between them at any time. To explain why that is a bit more difficult to set up, we need to dive into the technicalities of both approaches.
 
-**a)** VSCode Remote development in a nutshell is your local VSCode on your machine connecting (for instance, via SSH) to the remote server. The integrated terminal will then be essentially running a shell session on the remote server and the file explorer will show and operate on the files of the remote machine. On first connection, VSCode will automatically download and run some helper binary on the remote machine, but thats all, meaning that the setup is minimal (need to be able to connect via SSH) and the approach is very flexible, you can connect to any host you like.
+**a)** VSCode Remote development in a nutshell is your local VSCode on your machine connecting (for instance, via SSH) to the remote server. The integrated terminal will then be essentially running a shell session on the remote server and the file explorer will show and operate on the files of the remote machine. On first connection, VSCode will automatically download and run some helper binary on the remote machine, but that's all, meaning that the setup is minimal (you just need SSH access) and the approach is very flexible; you can connect to any host you like.
 
-**b)** Code-server is, like any self-hostable app, software you run on your server (for example with docker) that exposes a port, which you then access in your browser to work in the full-featured VSCode instance. The integrated terminal will be the shell session on your server (or your container) and the file explorer shows and operates on your server file system (or container file system). While the setup is therefore a tiny bit more involved, its not hard either and the result is again a full VSCode dev environment.
+**b)** Code-server is, like any self-hostable app, software you run on your server (for example with docker) that exposes a port, which you then access in your browser to work in the full-featured VSCode instance. The integrated terminal will be the shell session on your server (or your container) and the file explorer will show and operate on your server file system (or container file system). While the setup is therefore a tiny bit more involved, it's not hard either, and the result is again a full VSCode dev environment.
 
 So how to have both at the same time? When running code-server as a docker container, we need VSCode to SSH into this container to access the same files and environment. The container part is crucial here. It's not enough to SSH into our normal server, we need to SSH into the container on the server! While certainly possible, it took me a bit to figure out the details that I will share now.
 
 ## SSH into a docker container
 
-Setting up code-server is straightforward; we rely on the reputable [linuxserver.io](https://www.linuxserver.io/) community, which offers a mature [linuxserver-code-server](https://docs.linuxserver.io/images/docker-code-server/) image that is perfect for our case. We simply follow the provided instructions by creating and tweaking the [compose.yaml](https://docs.linuxserver.io/images/docker-code-server/#docker-compose-recommended-click-here-for-more-info) file, run the container and making sure all is working correctly.
+### Customizing the docker image
 
-Next up, we need to customize the image to add SSH functionality to it, since basically no image comes with a SSH server built-in. Fortunately, linuxserver images provide nice options of adding custom [scripts and services](https://docs.linuxserver.io/general/container-customization/) to the container on startup. That means, we can smuggle in a script that installs `openssh-server` on startup (if not yet installed).
+Setting up code-server is straightforward; we rely on the reputable [linuxserver.io](https://www.linuxserver.io/) community, which offers a mature [linuxserver-code-server](https://docs.linuxserver.io/images/docker-code-server/) image that is perfect for our case. We simply follow the provided instructions by creating and tweaking the [compose.yaml](https://docs.linuxserver.io/images/docker-code-server/#docker-compose-recommended-click-here-for-more-info) file, running the container, and making sure all is working correctly.
+
+Next up, we need to customize the image to add SSH functionality to it, since basically no image comes with an SSH server built-in. Fortunately, linuxserver images provide nice options of adding custom [scripts and services](https://docs.linuxserver.io/general/container-customization/) to the container on startup. That means we can smuggle in a script that installs `openssh-server` on startup (if not yet installed).
 
 ```bash title="init/01-install-openssh-server.sh"
 #!/usr/bin/with-contenv bash
@@ -68,10 +66,7 @@ for type in rsa ecdsa ed25519; do
     fi
 done
 
-
-# generate hosts SSH key
-ssh-keygen -t "${type}" -f "/config/ssh/ssh_host_${type}_key" -N "" -q
-
+# create sshd config, if not there yet
 if [ ! -f /config/ssh/sshd_config ]; then
     cat > /config/ssh/sshd_config <<EOF
 Port 22
@@ -95,7 +90,9 @@ set -euo pipefail
 exec /usr/sbin/sshd -D -e -f /config/ssh/sshd_config
 ```
 
-Having these two scripts ready, we now need to add them to the container through docker volumes. Also, as to not get in conflict with the default SSH daemon running already on the server, we most likely want to map the containers SSH port to something different.
+The two scripts are fairly thin, but are indeed all we need! The big clue is that the container's user (usually named `abc` in linuxserver.io images) has its `/config` directory as its home directory. When we persist that through a docker volume, we don't lose any of the files we create or copy there. Our personal SSH key to connect with, git credentials or GPG signing keys, all live in that directory and will still be there when the container gets re-created (for example after an image update).
+
+Having these scripts ready, we now need to add them to the container through docker volumes. Also, to avoid conflicting with the default SSH daemon running already on the server, we most likely want to map the container's SSH port to something different.
 
 ```yaml title="code-server.compose.yaml"
 services:
@@ -112,17 +109,63 @@ services:
       - 2222:22
 ```
 
-And we are (kinda) done! With this setup we should be able to ssh into the container directly from VSCode! After installing the appropriate [remote development extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) in VSCode we can connect to the container and develop remotely in there, as well as accessing VSCode in the browser and edit the same files in the same session.
+And we are (kinda) done! With this setup we should be able to ssh into the container directly from VSCode! When starting the container, it should show some indication that our supplied scripts were run and we should be able to access the code-server instance from the browser. The SSH server should also be running in the background, and we are ready to connect from our client.
 
-## Why this works
+### SSHing into the container
 
-If you are less experienced or didn't bother reading the scripts in detail, you might wonder if this is really all we need. The big clue is that the containers user (usually named `abc` in linuxserver.io images) has the `/config` directory as his home directory. As we persist that through a docker volume, we basically never loose any configuration setup we make. Adding our personal SSH key to connect with, setting git credentials or GPG signing keys, all lives in that directory and is still there when the container gets re-created (for example after an image update). That also makes it easy and convenient to simply copy over existing configuration files from somewhere else straight into the container; just copy them into the `config` dir with correct permissions (usually 100:100).
+Accessing VSCode in the browser is straightforward and easy to verify, so it's time to test the SSH connection.
+After installing the appropriate [remote development extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) in VSCode, we can connect to the container from there.
 
-An additional trick is that the SSH configuration, that usually lives in `/etc/ssh` is written and read from this `config` dir instead, also persisting things like SSH configuration or host keys.
+First, we click on the little icon in the bottom left corner of VSCode, which will open a popup asking us to select or enter a URL for the server we want to connect to. That will be some combination of hostname and/or port number, for example `abc@mydomain.com:2222`, given that we need to connect to the port the container exposes on our server. After choosing, we will most likely be asked for the password of the container user. While the username is `abc`, the password needs to be set on the container side with an [appropriate ENV variable](https://docs.linuxserver.io/images/docker-code-server/#environment-variables-e). Having given correct credentials, we will be dropped into a shell session in the container, the container's filesystem will show up in the explorer, and we are ready to open or clone a new repository and to develop!
+
+For convenience and security, it's advisable to use an SSH key rather than user credentials. This can be added the same way as for any SSH server, either by adding your key to `authorized_keys` or by using `ssh-copy-id` on the client side. Note that you are free to adjust any SSH related settings by just editing the `sshd_config` or other SSH related files in the `/config` dir (remember to set correct permissions).
+
+## Port forwarding
+
+If you develop a lot on the web, like me, you often want to run a local development server and access it on a port on the local host. While trickier in a cloud environment, it's also perfectly possible, with the right tweaks. The VSCode in the browser handles it a bit differently than when connecting remotely from a locally running VSCode instance.
+
+### VSCode remote
+
+When connecting with native VSCode and running a dev server that exposes a port locally, VSCode detects that automatically and forwards the port through the connection. It will even show you a little popup saying `"Your application running on port 4321 is available. Click to open in browser"`. Then you can simply access that port at `localhost:4321` on your device. A little caveat is that you most likely will need to bind the dev server to listen on all addresses for it to be properly proxied through. For example, when using Vite, you simply run the dev server with a special flag `vite --host` (or set the appropriate [setting in the config](https://vite.dev/config/server-options#server-host)).
+
+### VSCode in browser
+
+How to forward a port in browser-based VSCode depends a bit on how the host server itself handles incoming connections. Generally, code-server exposes the port of a running dev server on a subdomain. That means when your code-server is accessible at `https://code.mydomain.com` and you run a dev server on port `4321` in code-server, that port will be accessible on `https://4321.code.mydomain.com`. To access it, you need to do some manual labor, but the specifics depend on how your host server is set up. You most likely are running some form of reverse-proxy to serve your self-hosted applications, for example one that maps `code.mydomain.com` to the container running code-server. That same reverse-proxy needs to be instructed to also forward `https://4321.code.mydomain.com` to your code-server container. That can of course be a bit of a hassle, since the port might change depending on the project.
+
+Personally, using [traefik](https://doc.traefik.io/traefik/), the situation is fairly straightforward and I can share what small configuration serves me well.
+
+```yaml title="code-server.compose.yaml (with reverse proxying)"
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    volumes:
+      - ./config:/config
+      - ./init:/custom-cont-init.d:ro
+      - ./services:/custom-services.d:ro
+    networks:
+      - reverse-proxy
+    ports:
+      - 2222:22
+    labels:
+      # general traefik labels to serve code-server
+      traefik.enable: 'true'
+      traefik.http.routers.codeserver.rule: Host(`code.mydomain.com`)
+      traefik.http.routers.codeserver.entrypoints: websecure
+      traefik.http.services.codeserver.loadbalancer.server.port: '8443'
+
+      # this takes care of proxying to [someNumericalPort].code.mydomain.com
+      traefik.http.routers.codeserver-ports.rule: HostRegexp(`^\d+\.code\.mydomain\.com$`)
+      traefik.http.routers.codeserver-ports.entrypoints: websecure
+      traefik.http.routers.codeserver-ports.service: codeserver
+      traefik.http.routers.codeserver-ports.tls.domains[0].main: code.mydomain.com
+      traefik.http.routers.codeserver-ports.tls.domains[0].sans: '*.code.mydomain.com'
+```
+
+The magic here is to not only bind the base domain `code.mydomain.com` to the container, but also dynamically bind any numerical subdomain (aka port number) to the same container, while also requesting a wildcard SSL certificate for any subdomain. And voilà, port forwarding works smoothly in the browser, too!
 
 ## Additional tricks
 
-It's likely you'd like to add even more packages to the container by default, to avoid having to reinstall things after a container re-creation. How to do that and set up other things that greatly increase convenience of use I will cover in this section.
+It's likely you'd like to add even more packages to the container by default, to avoid having to reinstall things after a container re-creation. In this section, I will cover how to do that and set up other things, such as GPG keys, that greatly increase day-to-day convenience.
 
 ### Additional software
 
@@ -150,13 +193,13 @@ fi
 usermod -s /usr/bin/zsh abc
 ```
 
-This script can be modified to install many more different things or set up other related tools.
+This script can be modified to install many other things or set up other related tools.
 
-In this concrete example, the [tmux](https://github.com/tmux/tmux/wiki) package is something I greatly recommend; it's a terminal multiplexer thats very popular and convenient in the context of server administration, allowing you to run multiple shell sessions through the same connection and that also persists your current session even after you disconnect, so that you can always pick up straight where you left off.
+Of the packages shown here, [tmux](https://github.com/tmux/tmux/wiki) is something I greatly recommend; it's a terminal multiplexer that's very popular and convenient in the context of server administration, allowing you to run multiple shell sessions through the same connection, and it also persists your current session even after you disconnect, so that you can always pick up straight where you left off.
 
 ### GPG keys
 
-It's good practice to sign git commits with GPG, by creating a GPG key pair and telling git to use it to [autosign commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits). As they would also get lost during container re-creation, we can add another script that will import all keys in the `config` dir on startup.
+It's good practice to sign git commits with GPG by creating a GPG key pair and telling git to use it to [autosign commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits). As GPG keys would also get lost during container re-creation, we can add another script that will import all keys in the `config` dir on startup.
 
 ```bash title="03-setup-gpg.sh"
 #!/usr/bin/with-contenv bash
@@ -169,51 +212,10 @@ if ! gpg --list-secret-keys | grep -q "sec"; then
 fi
 ```
 
-### Port forwarding
-
-If you develop a lot on web, like me, you often want to run a local development server and access it on a port on the local host. While trickier in a cloud environment, it's also perfectly possible, with the right tweaks. The VSCode in browser handles it a bit different than when remote connecting from a locally running VSCode instance.
-
-#### VSCode remote
-
-When connecting with native VSCode and running a dev server that exposes a port locally, VSCode detects that automatically and forwards the port through the connection. It will even show you a little popup saying `"Your application running on port 4321 is available. Click to open in browser"`. Then you can simply access that port at `localhost:4321` on your device. A little caveat is that you most likely will need to bind the dev server to listen on all addresses for it to be properly proxied through. For example when using Vite, you simply run the dev server with a special flag `vite --host` (or set the appropriate [setting in the config](https://vite.dev/config/server-options#server-host)).
-
-#### VSCode in browser
-
-How to forward a port in browser-based VSCode, depends a bit on how the host server itself handles incoming connections. Generally, code-server exposes the port of a running dev server on a subdomain. That means when your code-server is accessible at `https://code.mydomain.com` and you run a dev server on port `4321` in code-server, that port will be accessible on `https://4321.code.mydomain.com`. To access that itself, you need to do some manual labor yourself, but what exactly depends on how your host server is setup. You most likely are running some form of reverse-proxy to serve your selfhosted applications, for example that maps `code.mydomain.com` to the container running code-server. That same reverse-proxy needs to be instructed to also forward `https://4321.code.mydomain.com` to your code-server container. Thats of course a bit hassle, when the port changes regularly, again, depending on how your proxying is generally set up.
-
-Personally, using [traefik](https://doc.traefik.io/traefik/) the situation is fairly straightforward and I can share what small configuration serves me well.
-
-```yaml title="code-server.compose.yaml"
-services:
-  code-server:
-    image: lscr.io/linuxserver/code-server:latest
-    volumes:
-      - ./config:/config
-      - ./init:/custom-cont-init.d:ro
-      - ./services:/custom-services.d:ro
-    networks:
-      - reverse-proxy
-    ports:
-      - 4444:22
-    labels:
-      # general traefik labels to serve code-server
-      traefik.enable: 'true'
-      traefik.http.routers.codeserver.rule: Host(`code.mydomain.com`)
-      traefik.http.routers.codeserver.entrypoints: websecure
-      traefik.http.services.codeserver.loadbalancer.server.port: '8443'
-
-      # this takes care of proxying to [someNumericalPort].code.mydomain.com
-      traefik.http.routers.codeserver-ports.rule: HostRegexp(`^\d+\.code\.mydomain\.com$`)
-      traefik.http.routers.codeserver-ports.entrypoints: websecure
-      traefik.http.routers.codeserver-ports.service: codeserver
-      traefik.http.routers.codeserver-ports.tls.domains[0].main: code.fjellhei.men
-      traefik.http.routers.codeserver-ports.tls.domains[0].sans: '*.code.fjellhei.men'
-```
-
-The magic here is to not only bind the base domain `code.mydomain.com` to the container, but also dynamically bind any numerical subdomain (aka port number) to the same container, with also defining to request a wildcard SSL certificat for any subdomain. And voilà, port forwarding works smooth in the browser, too!
+To use that feature, we of course need to either generate the key files in the container once or copy existing keys (with correct permissions) from elsewhere into the `/config` dir.
 
 ## Closing remarks
 
-To initially work out the right combinations of scripts, commands and configurations took a bit, before all was working as I wanted. The setup is quite something to wrap your head around and I encourage everyone who is interested not to give up to quick. My intention with the post is to not only write down for myself, how this stack is set up, but also to help others that have similar goals; so if things are a bit confusing on the first read, make sure to read the post again, section by section. Also, if you would like to have a look at the concrete setup I run on my actual server, feel free to have a look at the files in my repository: [FjellOverflow/fjellheimen](https://github.com/FjellOverflow/fjellheimen/tree/main/stacks/code-server).
+Working out the right combinations of scripts, commands, and configurations took some time, but the result was exactly what I wanted. The setup is quite something to wrap your head around and I encourage everyone who is interested not to give up too quickly. My intention with the post is to not only write down for myself how this stack is set up, but also to help others who have similar goals; so if things are a bit confusing on the first read, make sure to read the post again, section by section. Also, if you would like to have a look at the concrete setup I run on my actual server, feel free to check out my repository: [FjellOverflow/fjellheimen](https://github.com/FjellOverflow/fjellheimen/tree/main/stacks/code-server).
 
-I can say that the process was definitely worth its time and effort and I'm glad I got it working, as it greatly increases flexibility and productivity of my workflows, always developing on the identical codebase and in the same environment, without wasting time on installing or configuring dev tools and IDE. So for everyone who got this far in the post and attempts the same challenge themselves, good job, good luck and thanks for reading!
+The process was definitely worth the time and effort and I'm glad I got it working, as it greatly increases flexibility and productivity of my workflows, always developing on the same codebase and in the same environment, without wasting time on installing or configuring dev tools and IDEs. So for everyone who got this far in the post and attempts the same challenge themselves, good job, good luck and thanks for reading!
