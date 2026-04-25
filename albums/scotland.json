@@ -2,32 +2,32 @@
     "title": "Scotland",
     "description": "<p>Hiking in Scotland.</p>",
     "previewImage": {
-        "src": "../assets/albums/scotland/BguY6r7ZpAD7c6Ed2yk38BEVq19M7s3DWCVToal2.jpg"
+        "src": "../assets/albums/scotland/scotland-006.jpg"
     },
     "photos": [
         {
             "description": "Old Man of Storr, Scotland. August 2024.",
-            "src": "../assets/albums/scotland/BguY6r7ZpAD7c6Ed2yk38BEVq19M7s3DWCVToal2.jpg"
+            "src": "../assets/albums/scotland/scotland-006.jpg"
         },
         {
             "description": "Old Man of Storr, Scotland. August 2024.",
-            "src": "../assets/albums/scotland/txq8ttWbLpoWQCxJF6Z2TAFlyZkWzR0ibrmuVMRY.jpg"
+            "src": "../assets/albums/scotland/scotland-005.jpg"
         },
         {
             "description": "Quiraing, Scotland. August 2024.",
-            "src": "../assets/albums/scotland/vFFDaORyL0nY5WX1o8i03zNgd7Ij9wStfychdUIe.jpg"
+            "src": "../assets/albums/scotland/scotland-004.jpg"
         },
         {
             "description": "Quiraing, Scotland. August 2024.",
-            "src": "../assets/albums/scotland/1r5oEXaQDuqA1Unqlkmd0NbGe0OuY4uPrbxmyRgH.jpg"
+            "src": "../assets/albums/scotland/scotland-003.jpg"
         },
         {
             "description": "Quiraing, Scotland. August 2024.",
-            "src": "../assets/albums/scotland/2WVb7uKVBsvYnsEetBVzU45YKNU6IT8jmlHh6UX3.jpg"
+            "src": "../assets/albums/scotland/scotland-002.jpg"
         },
         {
             "description": "Quiraing, Scotland. August 2024.",
-            "src": "../assets/albums/scotland/VTPkndzdA1YysnpgSaTis6MtIlBRTymInqECZw8l.jpg"
+            "src": "../assets/albums/scotland/scotland-001.jpg"
         }
     ]
 }
