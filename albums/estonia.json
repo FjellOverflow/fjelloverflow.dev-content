@@ -2,32 +2,32 @@
     "title": "Estonia",
     "description": "<p>Memories collected in Estonia.</p>",
     "previewImage": {
-        "src": "../assets/albums/estonia/KlwDa2TpJVobXmGqElf6ICPJ0UiaOONZqLtjBXhI.jpg"
+        "src": "../assets/albums/estonia/estonia-001.jpg"
     },
     "photos": [
         {
             "description": "Hiiumaa, Estonia. August 2025.",
-            "src": "../assets/albums/estonia/Smoles9ySnCd9zXLWr9Jg8aY3XcWdTdGq1swNsJd.jpg"
+            "src": "../assets/albums/estonia/estonia-006.jpg"
         },
         {
             "description": "Hiiumaa, Estonia. August 2025.",
-            "src": "../assets/albums/estonia/WT5wtqtTbwCulYJbLn1ZXzqOD9zqwymrpP5rc3n9.jpg"
+            "src": "../assets/albums/estonia/estonia-005.jpg"
         },
         {
             "description": "Meenikunno bog, Estonia. August 2025.",
-            "src": "../assets/albums/estonia/rNDBJOrxGpNngYRoGDlAL4UfBUItImzf9XzzS2k2.jpg"
+            "src": "../assets/albums/estonia/estonia-004.jpg"
         },
         {
             "description": "Meenikunno bog, Estonia. August 2025.",
-            "src": "../assets/albums/estonia/qzqKdAzpQzXYTDqpdI5ATrpG4faAJIKWt5M489id.jpg"
+            "src": "../assets/albums/estonia/estonia-003.jpg"
         },
         {
             "description": "Pedassaare, Estonia. July 2025.",
-            "src": "../assets/albums/estonia/YifbIHDPYtUf1pw3caNAoUkKhox49uZQFzFRi29U.jpg"
+            "src": "../assets/albums/estonia/estonia-002.jpg"
         },
         {
             "description": "Sõrve Lighthouse, Saaremaa, Estonia. June 2024.",
-            "src": "../assets/albums/estonia/KlwDa2TpJVobXmGqElf6ICPJ0UiaOONZqLtjBXhI.jpg"
+            "src": "../assets/albums/estonia/estonia-001.jpg"
         }
     ]
 }
