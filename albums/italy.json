@@ -2,48 +2,56 @@
     "title": "Italy",
     "description": "<p>Impressions from Italy.</p>",
     "previewImage": {
-        "src": "../assets/albums/italy/nR0A9LHcB6IYeE7aWZI2hF3N6kGPFeCaQEKMGJOg.jpg"
+        "src": "../assets/albums/italy/italy-004.jpg"
     },
     "photos": [
         {
-            "description": "Rosengarten, Carezza, Italy. January 2023.",
-            "src": "../assets/albums/italy/KK779dlvIvSQYWZ9R3aeXwOaZfJIqmTQu017lKNO.jpg"
+            "description": "Rosengarten, Carezza, Italy. February 2026.",
+            "src": "../assets/albums/italy/italy-012.jpg"
+        },
+        {
+            "description": "Latemar, Carezza, Italy. February 2026.",
+            "src": "../assets/albums/italy/italy-011.jpg"
         },
         {
             "description": "Rosengarten, Carezza, Italy. January 2023.",
-            "src": "../assets/albums/italy/gdTEw4MP8Wk7pYqbZHBgYHqBxn7uWXQzGddRlfh9.jpg"
+            "src": "../assets/albums/italy/italy-010.jpg"
+        },
+        {
+            "description": "Rosengarten, Carezza, Italy. January 2023.",
+            "src": "../assets/albums/italy/italy-009.jpg"
         },
         {
             "description": "Latemar, Carezza, Italy. January 2023.",
-            "src": "../assets/albums/italy/JB3xombu2U4qgHirrTI9xcHTP7hEkleM26vAF7dq.jpg"
+            "src": "../assets/albums/italy/italy-008.jpg"
         },
         {
             "description": "Latemar, Carezza, Italy. January 2023.",
-            "src": "../assets/albums/italy/ZUNtmMHnWsOsgy19o97yauLKgH6xwUqwwKsXyG4W.jpg"
+            "src": "../assets/albums/italy/italy-007.jpg"
         },
         {
             "description": "Latemar, Carezza, Italy. January 2023.",
-            "src": "../assets/albums/italy/J1ZgF6ndPHs6tORKESa6mk4EWcoap6QO7JGPDKjH.jpg"
+            "src": "../assets/albums/italy/italy-006.jpg"
         },
         {
             "description": "Latemar, Carezza, Italy. January 2023.",
-            "src": "../assets/albums/italy/hppNcLNhi7u0WyMOfm8hHjgVWzisComchprYKEwM.jpg"
+            "src": "../assets/albums/italy/italy-005.jpg"
         },
         {
             "description": "Carezza, Italy. July 2022.",
-            "src": "../assets/albums/italy/nR0A9LHcB6IYeE7aWZI2hF3N6kGPFeCaQEKMGJOg.jpg"
+            "src": "../assets/albums/italy/italy-004.jpg"
         },
         {
             "description": "Carezza, Italy. July 2022.",
-            "src": "../assets/albums/italy/z8IsBz5v51JDyP12nAK7zxHmSGKW5gbMlGNPoovZ.jpg"
+            "src": "../assets/albums/italy/italy-003.jpg"
         },
         {
             "description": "Carezza, Italy. July 2022.",
-            "src": "../assets/albums/italy/vb2BxVEkvAFOMWvaiXj1VnHRtfCRWCTNTwuwqCBF.jpg"
+            "src": "../assets/albums/italy/italy-002.jpg"
         },
         {
             "description": "Carezza, Italy. July 2022.",
-            "src": "../assets/albums/italy/OJCLWKkk4slJnzKqhcmdA5DnnRGMInUGqNiuBcbx.jpg"
+            "src": "../assets/albums/italy/italy-001.jpg"
         }
     ]
 }
