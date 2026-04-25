@@ -1,13 +1,12 @@
 ---
 title: Self-hosting a cloud development environment
 description: Combining VSCode Remote and code-server in one container
-publishedDate: 2026-04-24
+publishedDate: 2026-04-25
 previewImage: '../assets/posts/cloud-development-environment.png'
 openGraphImage: '../assets/posts/cloud-development-environment.png'
 tags:
   - docker
   - linux
-draft: true
 ---
 
 As software developers, many of us like to work on some private projects in our free time and on multiple devices: a stationary PC, a laptop, maybe a second laptop... Switching between devices is a very tedious task; we constantly need to sync the changes, set up credentials and configurations, and install the same development environment on each device from scratch. Moving from one device to another with unfinished work-in-progress is awkward, so I decided to do something about it and here is my solution: a _cloud-based development environment_!
@@ -31,7 +30,7 @@ While a bit scarcer, there are also mature FOSS solutions that can be self-hoste
 
 ## Best of both worlds
 
-I really like both approaches; they both worked well for me and were fairly straightforward to set up. So if you want _either_ **a)** to work in your local VSCode or **b)** to work in the browser, then pick your tool and sail off into the sunset. But sadistic as I am, I wanted _both_. I wanted to work in local VSCode, with the browser IDE as a fallback, and of course they should both run in the same environment, so that you could flawlessly switch between them at any time. To explain why that is a bit more difficult to set up, we need to dive into the technicalities of both approaches.
+I really like both approaches; they both worked well for me and were fairly straightforward to set up. So if you want _either_ **a)** to work in your local VSCode _or_ **b)** to work in the browser, then pick your tool and sail off into the sunset. But sadistic as I am, I wanted _both_. I wanted to work in local VSCode, with the browser IDE as a fallback, and of course they should both run in the same environment, so that you could flawlessly switch between them at any time. To explain why that is a bit more difficult to set up, we need to dive into the technicalities of both approaches.
 
 **a)** VSCode Remote development in a nutshell is your local VSCode on your machine connecting (for instance, via SSH) to the remote server. The integrated terminal will then be essentially running a shell session on the remote server and the file explorer will show and operate on the files of the remote machine. On first connection, VSCode will automatically download and run some helper binary on the remote machine, but that's all, meaning that the setup is minimal (you just need SSH access) and the approach is very flexible; you can connect to any host you like.
 
@@ -128,7 +127,7 @@ If you develop a lot on the web, like me, you often want to run a local developm
 
 ### VSCode remote
 
-When connecting with native VSCode and running a dev server that exposes a port locally, VSCode detects that automatically and forwards the port through the connection. It will even show you a little popup saying `"Your application running on port 4321 is available. Click to open in browser"`. Then you can simply access that port at `localhost:4321` on your device. A little caveat is that you most likely will need to bind the dev server to listen on all addresses for it to be properly proxied through. For example, when using Vite, you simply run the dev server with a special flag `vite --host` (or set the appropriate [setting in the config](https://vite.dev/config/server-options#server-host)).
+When connecting with native VSCode and running a dev server that exposes a port locally, VSCode detects that automatically and forwards the port through the connection. It will even show you a little popup saying *"Your application running on port 4321 is available. Click to open in browser"*. Then you can simply access that port at `localhost:4321` on your device. A little caveat is that you most likely will need to bind the dev server to listen on all addresses for it to be properly proxied through. For example, when using Vite, you simply run the dev server with a special flag `vite --host` (or set the appropriate [setting in the config](https://vite.dev/config/server-options#server-host)).
 
 ### VSCode in browser
 
