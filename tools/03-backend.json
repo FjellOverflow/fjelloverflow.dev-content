@@ -1,0 +1,43 @@
+{
+    "title": "Backend",
+    "icon": "tabler--server",
+    "items": [
+        {
+            "title": "Node",
+            "icon": "simple-icons--nodedotjs",
+            "highlightColor": "#5FA04E",
+            "description": "The JavaScript runtime for the server. While I like experimenting with alternatives these days, it's rare to avoid Node in today's web development."
+        },
+        {
+            "title": "Bun",
+            "icon": "simple-icons--bun",
+            "highlightColor": "#F472B6",
+            "description": "Fast JavaScript runtime & bundler with TypeScript as a first-class citizen. I've enjoyed playing with Bun a lot and believe in its potential, so it's now my go-to for private projects and prototypes."
+        },
+        {
+            "title": "Express",
+            "icon": "simple-icons--express",
+            "highlightColor": "#6B7280",
+            "description": "A minimal, unopinionated web framework for Node. It's a rather unexciting choice, but it serves its purpose well."
+        },
+        {
+            "title": "Swagger",
+            "icon": "simple-icons--swagger",
+            "highlightColor": "#85EA2D",
+            "description": "A toolset for designing and documenting REST APIs. Integrating OpenAPI/Swagger into a backend is almost a must-have, in my opinion."
+        },
+        {
+            "title": "SQL Server",
+            "icon": "simple-icons--microsoftsqlserver",
+            "highlightColor": "#CC2927",
+            "description": "Microsoft's enterprise relational database. While I'm not a SQL wizard, I'm comfortable working with a full-scale DBMS."
+        },
+        {
+            "title": "SQLite",
+            "icon": "simple-icons--sqlite",
+            "highlightColor": "#3FA9D6",
+            "description": "A lightweight, file-based SQL database. My favorite for prototypes and private projects; it's almost magic how performant and reliable a file-based database can be.",
+            "tag": "sqlite"
+        }
+    ]
+}

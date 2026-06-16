@@ -1,0 +1,44 @@
+{
+    "title": "DevOps & Infrastructure",
+    "icon": "tabler--tool",
+    "items": [
+        {
+            "title": "Docker",
+            "icon": "simple-icons--docker",
+            "highlightColor": "#2496ED",
+            "description": "A platform for containerizing applications. Docker is definitely my MVP of all tools; I'm not only comfortable using containerization in DevOps and for operating my home server, but I also just really enjoy working with Docker and Compose.",
+            "tag": "docker"
+        },
+        {
+            "title": "Ansible",
+            "icon": "simple-icons--ansible",
+            "highlightColor": "#EE0000",
+            "description": "Infrastructure as Code tool. I love the idea, and for a while I obsessed over fully provisioning my workstations and server with Ansible.",
+            "tag": "ansible"
+        },
+        {
+            "title": "Traefik",
+            "icon": "simple-icons--traefikproxy",
+            "highlightColor": "#24A1C1",
+            "description": "Modern reverse proxy and load balancer. Neat tool that does all the heavy lifting on my home server."
+        },
+        {
+            "title": "Azure",
+            "icon": "simple-icons--microsoftazure",
+            "highlightColor": "#0078D4",
+            "description": "Microsoft's cloud platform. While not an expert by a long stretch, I'm comfortable enough with many of the most common DevOps tasks within Azure."
+        },
+        {
+            "title": "Actions",
+            "icon": "simple-icons--githubactions",
+            "highlightColor": "#2088FF",
+            "description": "GitHub's built-in CI/CD automation. Pretty much every single one of my private projects uses GitHub Actions for some combination of integration checks, building, and deploying."
+        },
+        {
+            "title": "Pipelines",
+            "icon": "simple-icons--bitbucket",
+            "highlightColor": "#0052CC",
+            "description": "Atlassian's Bitbucket CI/CD system. I've maintained my fair share of Bitbucket pipelines in previous positions."
+        }
+    ]
+}

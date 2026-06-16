@@ -1,0 +1,36 @@
+{
+    "title": "Quality & Testing",
+    "icon": "tabler--test-pipe",
+    "items": [
+        {
+            "title": "Vitest",
+            "icon": "simple-icons--vitest",
+            "highlightColor": "#00FF74",
+            "description": "Vite-native test runner. My default for unit testing in frontend apps."
+        },
+        {
+            "title": "Cypress",
+            "icon": "simple-icons--cypress",
+            "highlightColor": "#69D3A7",
+            "description": "Component and end-to-end browser testing framework. Where it fits, I like backing a project with a suite of meaningful tests covering the critical user flows."
+        },
+        {
+            "title": "Postman",
+            "icon": "simple-icons--postman",
+            "highlightColor": "#FF6C37",
+            "description": "An API development and testing client. Even though I keep eyeing alternatives, it's still my go-to for poking at APIs."
+        },
+        {
+            "title": "Lighthouse",
+            "icon": "simple-icons--lighthouse",
+            "highlightColor": "#F44B21",
+            "description": "Google's web quality auditing tool. I tend to spend quite a while in the Lighthouse panel, trying to improve the performance and accessibility of my web apps."
+        },
+        {
+            "title": "ESLint",
+            "icon": "simple-icons--eslint",
+            "highlightColor": "#4B32C3",
+            "description": "A pluggable linter for JavaScript and TypeScript. While I've been experimenting with newer alternatives, I still rely on ESLint and its many plugins to keep code quality high in enterprise-scale applications."
+        }
+    ]
+}

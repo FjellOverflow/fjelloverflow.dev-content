@@ -1,0 +1,45 @@
+{
+    "title": "Frontend",
+    "icon": "tabler--layout-dashboard",
+    "items": [
+        {
+            "title": "React",
+            "icon": "simple-icons--react",
+            "highlightColor": "#61DAFB",
+            "description": "One of, if not the, most popular frontend libraries. I enjoy it for quick prototypes and larger projects alike, often paired with tools from its rich ecosystem."
+        },
+        {
+            "title": "Vue",
+            "icon": "simple-icons--vuedotjs",
+            "highlightColor": "#4FC08D",
+            "description": "One of the major frontend frameworks. I've used it continuously since the Vue 2 days across all kinds of projects, so it's very close to my heart and I always enjoy coming back to it.",
+            "tag": "vue"
+        },
+        {
+            "title": "Astro",
+            "icon": "simple-icons--astro",
+            "highlightColor": "#BC52EE",
+            "description": "Frontend framework focused on static site generation. For me, Astro is hands-down the best SSG framework out there, and I use it across various private projects; even this site is powered by Astro!",
+            "tag": "astro"
+        },
+        {
+            "title": "Tailwind",
+            "icon": "simple-icons--tailwindcss",
+            "highlightColor": "#06B6D4",
+            "description": "A modern utility-first CSS framework. Always my first choice for building clean, responsive UIs, often alongside a component library.",
+            "tag": "tailwindcss"
+        },
+        {
+            "title": "Vite",
+            "icon": "simple-icons--vite",
+            "highlightColor": "#9135FF",
+            "description": "The gold-standard frontend build tool and dev server. I use it in every frontend project without exception and I'm sure you do too!"
+        },
+        {
+            "title": "PWA",
+            "icon": "simple-icons--pwa",
+            "highlightColor": "#8B5CF6",
+            "description": "Progressive Web Apps are web apps that install and run offline like native apps. I really like the concept and have shipped them wherever it made sense."
+        }
+    ]
+}

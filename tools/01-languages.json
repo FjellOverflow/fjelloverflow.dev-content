@@ -1,0 +1,38 @@
+{
+    "title": "Languages",
+    "icon": "tabler--code",
+    "items": [
+        {
+            "title": "TypeScript",
+            "icon": "simple-icons--typescript",
+            "highlightColor": "#3178C6",
+            "description": "Typed superset of JavaScript. As my most-used language and the bread & butter of my day job, it's my first choice for anything web.",
+            "tag": "typescript"
+        },
+        {
+            "title": "JavaScript",
+            "icon": "simple-icons--javascript",
+            "highlightColor": "#F7DF1E",
+            "description": "Core technology of the web. While I started out with JavaScript, I have since moved on to TypeScript wherever possible."
+        },
+        {
+            "title": "Python",
+            "icon": "simple-icons--python",
+            "highlightColor": "#3776AB",
+            "description": "Versatile, general-purpose language. I use it mostly for scripting and small data analysis, but it's also a guilty pleasure I enjoy coming back to every now and then.",
+            "tag": "python"
+        },
+        {
+            "title": "Bash",
+            "icon": "simple-icons--gnubash",
+            "highlightColor": "#4EAA25",
+            "description": "The shell scripting language behind most Linux systems. I use it regularly to manage my servers, in CI/CD pipelines, and when tweaking my Linux workstations."
+        },
+        {
+            "title": "HTML & CSS",
+            "icon": "simple-icons--html5",
+            "highlightColor": "#E34F26",
+            "description": "The building blocks of every web page. Working mainly in frontend development, I use HTML & CSS as part of my job every day."
+        }
+    ]
+}

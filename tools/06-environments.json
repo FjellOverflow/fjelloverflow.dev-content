@@ -1,0 +1,44 @@
+{
+    "title": "Environments",
+    "icon": "tabler--terminal-2",
+    "items": [
+        {
+            "title": "VSCodium",
+            "icon": "simple-icons--vscodium",
+            "highlightColor": "#2F80ED",
+            "description": "A telemetry-free build of VS Code. My daily editor for any language."
+        },
+        {
+            "title": "tmux",
+            "icon": "simple-icons--tmux",
+            "highlightColor": "#1BB91F",
+            "description": "A terminal multiplexer for splits and persistent sessions. I struggle to understand how I could ever administer my server without it."
+        },
+        {
+            "title": "zsh",
+            "icon": "simple-icons--zsh",
+            "highlightColor": "#F15A24",
+            "description": "A highly customizable Unix shell. My default shell on all systems."
+        },
+        {
+            "title": "Debian",
+            "icon": "simple-icons--debian",
+            "highlightColor": "#A81D33",
+            "description": "A stable, no-surprises Linux distribution. My default choice for servers.",
+            "tag": "linux"
+        },
+        {
+            "title": "Fedora",
+            "icon": "simple-icons--fedora",
+            "highlightColor": "#51A2DA",
+            "description": "A polished, more up-to-date Linux distribution. My daily-driver desktop.",
+            "tag": "linux"
+        },
+        {
+            "title": "NixOS",
+            "icon": "simple-icons--nixos",
+            "highlightColor": "#5277C3",
+            "description": "A Linux distro with fully declarative, reproducible system config. While still learning its basics, I've already become a big fan and started daily-driving it."
+        }
+    ]
+}
